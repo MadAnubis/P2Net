@@ -1,34 +1,23 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <time.h>
-#include <stdlib.h>
-#include "threading/linux/threading_linux_2.h"
+#include <include/p2net.h>
 
-class Test
-{
-  public:
-   void run()
-   {
-     for(int c = 0;c < 10; c++)
-     {
-       printf("ALIVE!!!\n");
-       sleep(1);
-     }
-     printf("FINISH!!\n");
-   }
-};
+#include "threading/linux/threading_linux_2.h"
+#include "log/system_log.h"
+
 int main()
 {
-  Test* aa;
-  ThreadingLinux2<Test> bb;
+  SystemLog* test = new SystemLog();
+
+  char str[] = "Kollane";
+  std::vector<char> aa1;
+
+  aa1.insert(aa1.end(), str, str + 7);
 
   for(int c = 0; c < 10; c++)
   {
-    aa = new Test();
-    bb.startThread(aa);
+    test->addLog(&aa1);
   }
 
-  sleep(20);
-
+  sleep(5);
+  
   return 0;
 }
