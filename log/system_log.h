@@ -16,21 +16,30 @@ class SystemLog
     void addLog(std::vector<char>* log);
 
   private:
-    struct connection_file_cont_
+    struct connection_cont_
     {
-      int IP_;
-      short port_;
-      std::vector<char> total_send_;
+      unsigned int ip_;
+      unsigned short port_;
+      std::vector<char> total_sent_;
       std::vector<char> total_received_;
       unsigned int total_connections_;
       int last_connection_time_;
     };
+
     bool working_;
 
     std::mutex buffer_lock_;
     std::list<std::vector<char>*> buffer_;
+    std::mutex connection_lock_;
+    std::list<connection_cont_*> connections_;
 
     ThreadingLinux2<SystemLog> thread_;
+
+    connection_cont_* startConnection(
+                    std::vector<char>* data);
+    connection_cont_* getConnection(std::vector<char>* data);
+    void closeConnection(std::vector<char>* data);
+
 };
 
 #endif //SYSTEM_LOG_H

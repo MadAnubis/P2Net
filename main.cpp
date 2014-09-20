@@ -5,19 +5,18 @@
 
 int main()
 {
-  SystemLog* test = new SystemLog();
+  char f[] = "1234567890";
+  std::vector<char> aa;
+  char s[6];
 
-  char str[] = "Kollane";
-  std::vector<char> aa1;
+  aa.insert(aa.begin(), f, f + 10);
 
-  aa1.insert(aa1.end(), str, str + 7);
+  for(int c = 0; c < 5; ++c)
+    s[c] = aa[c];
+  s[5] = 0;
 
-  for(int c = 0; c < 10; c++)
-  {
-    test->addLog(&aa1);
-  }
+  printf("%s\n", s);
 
-  sleep(5);
   
   return 0;
 }

@@ -53,3 +53,33 @@ void SystemLog::addLog(std::vector<char>* log)
 
   buffer_lock_.unlock(); //Unlock
 }
+SystemLog::connection_cont_* SystemLog::startConnection(
+                    std::vector<char>* data)
+{
+  FILE* in_file = NULL;
+  char name[] = "Logs/Connection_logs/123412";
+  connection_cont_* temp = new connection_cont_();
+
+  temp->ip_ = static_cast<unsigned int>(data->front());
+  temp->port_ = static_cast<unsigned int>(data->front() + 4);
+  temp->total_sent_.push_back('0');
+  temp->total_received_.push_back('0');
+  temp->total_connections_ = 0;
+  temp->last_connection_time_ = time(NULL);
+
+
+  for(int c = 0; c < 6; ++c)
+    name[c + 21] = (*data)[c];
+
+
+  in_file = fopen(name, "r");
+
+  connection_lock_.lock(); // Lock
+  connections_.push_back(temp);
+  connection_lock_.unlock();
+  
+  if(in_file == NULL)
+    return temp;
+  return NULL;
+}
+

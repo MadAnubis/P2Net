@@ -11,7 +11,7 @@ FLOG = log/
 PRJNAME : $(OBJS)
 	$(CC) $(LFLAGS) $(LIBS) $(OBJS) -o $(PRJNAME)
 
-main.o : main.cpp $(FTHREADL)threading_linux_2.h system_log.o
+main.o : main.cpp $(FTHREADL)threading_linux_2.h 
 	$(CC) $(CFLAGS) main.cpp
 
 system_log.o : $(FLOG)system_log.cpp $(FLOG)system_log.h $(FTHREADL)threading_linux_2.h
