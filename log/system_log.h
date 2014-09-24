@@ -3,8 +3,11 @@
 
 #include "include/p2net.h"
 
-#include "threading/linux/threading_linux_2.h"
+#ifdef WINDOWS
 
+#else
+#include "threading/linux/threading_linux_2.h"
+#endif
 class SystemLog
 {
   public:
@@ -33,12 +36,14 @@ class SystemLog
     std::mutex connection_lock_;
     std::list<connection_cont_*> connections_;
 
-    ThreadingLinux2<SystemLog> thread_;
+    Threading<SystemLog> thread_;
 
     connection_cont_* startConnection(
                     std::vector<char>* data);
-    connection_cont_* getConnection(std::vector<char>* data);
-    void closeConnection(std::vector<char>* data);
+    connection_cont_* getConnection(
+                    std::vector<char>* data);
+    void closeConnection(
+                    std::vector<char>* data);
 
 };
 

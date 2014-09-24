@@ -28,5 +28,6 @@
   #include <vector>
   #include <cstdlib>
   #include <ctime>
+  #include <cstring>
 
 #endif //P2NET_H

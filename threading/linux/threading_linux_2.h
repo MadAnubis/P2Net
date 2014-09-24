@@ -3,11 +3,11 @@
 
 #include <pthread.h>
 
-template<class T> class ThreadingLinux2
+template<class T> class Threading
 {
   public:
-   ThreadingLinux2() {}
-   ~ThreadingLinux2() {}
+   Threading() {}
+   ~Threading() {}
 
    int startThread(T* data)
    {

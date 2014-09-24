@@ -58,6 +58,7 @@ SystemLog::connection_cont_* SystemLog::startConnection(
 {
   FILE* in_file = NULL;
   char name[] = "Logs/Connection_logs/123412";
+  //char buffer[64];
   connection_cont_* temp = new connection_cont_();
 
   temp->ip_ = static_cast<unsigned int>(data->front());
@@ -80,6 +81,18 @@ SystemLog::connection_cont_* SystemLog::startConnection(
   
   if(in_file == NULL)
     return temp;
+
+  for(int c = 0; c < 3; ++c)
+  {
+    
+    switch (c)
+    {
+      case 0:
+        temp->total_sent_.erase(
+                temp->total_sent_.begin());
+        break;
+    }
+  }
   return NULL;
 }
 
